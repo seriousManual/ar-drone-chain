@@ -1,0 +1,17 @@
+{
+  "name": "ar-drone-chain",
+  "version": "1.0.0",
+  "description": "chain for the ar-drone handler",
+  "main": "chain.js",
+  "directories": {
+    "example": "example"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "ms": "^0.7.1"
+  }
+}

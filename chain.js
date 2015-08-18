@@ -1,0 +1,39 @@
+var ms = require('ms');
+
+var HandlerCB = require('./lib/HandlerCB');
+var HandlerTimeout = require('./lib/HandlerTimeout');
+
+function createChain() {
+    var chain = {
+        _queue: [],
+
+        _runNext: function() {
+            var next = chain._queue.shift();
+
+            next.run(function() {
+                chain._runNext();
+            });
+        },
+
+        do: function(fn) {
+            chain._queue.push(new HandlerCB(fn));
+
+            return chain;
+        },
+
+        for: function(duration, fn) {
+            var durationMS = ms(duration);
+            chain._queue.push(new HandlerTimeout(durationMS, fn));
+
+            return chain;
+        }
+    };
+
+    process.nextTick(function() {
+        chain._runNext();
+    });
+
+    return chain;
+}
+
+module.exports = createChain;
