@@ -7,11 +7,16 @@
     "example": "example"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node ./node_modules/mocha/bin/mocha tests"
   },
   "author": "",
   "license": "MIT",
   "dependencies": {
     "ms": "^0.7.1"
+  },
+  "devDependencies": {
+    "chai": "^3.2.0",
+    "mocha": "^2.2.5",
+    "sinon": "^1.15.4"
   }
 }
