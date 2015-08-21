@@ -3,6 +3,7 @@ var sinon = require('sinon');
 
 var HandlerCB = require('../lib/HandlerCB');
 var HandlerTimeout = require('../lib/HandlerTimeout');
+var createChain = require('../chain');
 
 describe('Handlers', function() {
     describe('HandlerCB', function() {
@@ -33,6 +34,47 @@ describe('Handlers', function() {
             expect(spy.args.length).to.equal(1);
 
             clock.tick(100);
+        });
+    });
+
+    describe('chain', function() {
+        var chain, spy1, spy2, spy3, secondCall, thirdCall;
+
+        before(function(done) {
+            spy1 = sinon.spy(function(callback) {
+                process.nextTick(callback);
+            });
+            spy2 = sinon.spy(function() {
+                secondCall = Date.now();
+            });
+            spy3 = sinon.spy(function(callback) {
+                thirdCall = Date.now();
+                setTimeout(callback, 100);
+            });
+
+            chain = createChain()
+                .do(spy1)
+                .for('100ms', spy2)
+                .do(spy3)
+                .do(function() {
+                    done();
+                });
+        });
+
+        it('should call the first do invocation', function() {
+            expect(spy1.args.length).to.equal(1);
+        });
+
+        it('should call the for invocation', function() {
+            expect(spy2.args.length).to.equal(1);
+        });
+
+        it('should call the second do invocation', function() {
+            expect(spy3.args.length).to.equal(1);
+        });
+
+        it('should execute the for section for 100ms', function() {
+            expect(thirdCall - secondCall).to.be.within(90, 110);
         });
     });
 });
