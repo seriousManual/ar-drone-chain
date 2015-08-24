@@ -4,30 +4,30 @@ var HandlerCB = require('./lib/HandlerCB');
 var HandlerTimeout = require('./lib/HandlerTimeout');
 
 function createChain(callback) {
-    callback = callback || function() {};
+    callback = callback || function () {};
 
     var chain = {
         _queue: [],
 
-        _runNext: function() {
+        _runNext: function () {
             var next = chain._queue.shift();
 
             if (!next) {
                 return callback();
             }
 
-            next.run(function() {
+            next.run(function () {
                 chain._runNext();
             });
         },
 
-        do: function(fn) {
+        do: function (fn) {
             chain._queue.push(new HandlerCB(fn));
 
             return chain;
         },
 
-        for: function(duration, fn) {
+        for: function (duration, fn) {
             var durationMS = ms(duration);
             chain._queue.push(new HandlerTimeout(durationMS, fn));
 
@@ -35,7 +35,7 @@ function createChain(callback) {
         }
     };
 
-    process.nextTick(function() {
+    process.nextTick(function () {
         chain._runNext();
     });
 

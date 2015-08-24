@@ -5,10 +5,10 @@ var HandlerCB = require('../lib/HandlerCB');
 var HandlerTimeout = require('../lib/HandlerTimeout');
 var createChain = require('../chain');
 
-describe('Handlers', function() {
-    describe('HandlerCB', function() {
-        it('should call the callback', function(done) {
-            var handler = new HandlerCB(function(callback) {
+describe('Handlers', function () {
+    describe('HandlerCB', function () {
+        it('should call the callback', function (done) {
+            var handler = new HandlerCB(function (callback) {
                 setTimeout(callback, 100);
             });
 
@@ -16,17 +16,17 @@ describe('Handlers', function() {
         });
     });
 
-    describe('HandlerTimeout', function() {
+    describe('HandlerTimeout', function () {
         var clock;
-        before(function() {
+        before(function () {
             clock = sinon.useFakeTimers();
         });
 
-        after(function() {
+        after(function () {
             clock.restore();
         });
 
-        it('should call the handler and the callback after the specified time', function(done) {
+        it('should call the handler and the callback after the specified time', function (done) {
             var spy = sinon.spy();
             var handler = new HandlerTimeout(100, spy);
 
@@ -37,21 +37,21 @@ describe('Handlers', function() {
         });
     });
 
-    describe('chain', function() {
+    describe('chain', function () {
         var chain, spy1, spy2, spy3, secondCall, thirdCall, finalSpy;
 
-        before(function(done) {
-            spy1 = sinon.spy(function(callback) {
+        before(function (done) {
+            spy1 = sinon.spy(function (callback) {
                 process.nextTick(callback);
             });
-            spy2 = sinon.spy(function() {
+            spy2 = sinon.spy(function () {
                 secondCall = Date.now();
             });
-            spy3 = sinon.spy(function(callback) {
+            spy3 = sinon.spy(function (callback) {
                 thirdCall = Date.now();
                 setTimeout(callback, 100);
             });
-            finalSpy = sinon.spy(function() {
+            finalSpy = sinon.spy(function () {
                 done();
             });
 
@@ -61,19 +61,19 @@ describe('Handlers', function() {
                 .do(spy3);
         });
 
-        it('should call the first do invocation', function() {
+        it('should call the first do invocation', function () {
             expect(spy1.args.length).to.equal(1);
         });
 
-        it('should call the for invocation', function() {
+        it('should call the for invocation', function () {
             expect(spy2.args.length).to.equal(1);
         });
 
-        it('should call the second do invocation', function() {
+        it('should call the second do invocation', function () {
             expect(spy3.args.length).to.equal(1);
         });
 
-        it('should execute the for section for 100ms', function() {
+        it('should execute the for section for 100ms', function () {
             expect(thirdCall - secondCall).to.be.within(90, 110);
         });
     });
