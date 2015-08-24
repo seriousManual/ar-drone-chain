@@ -9,7 +9,7 @@
   "scripts": {
     "test": "node ./node_modules/mocha/bin/mocha tests"
   },
-  "author": "",
+  "author": "Manuel Ernst <seriousstuff@gmx.de>",
   "license": "MIT",
   "dependencies": {
     "ms": "^0.7.1"
