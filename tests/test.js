@@ -38,7 +38,7 @@ describe('Handlers', function() {
     });
 
     describe('chain', function() {
-        var chain, spy1, spy2, spy3, secondCall, thirdCall;
+        var chain, spy1, spy2, spy3, secondCall, thirdCall, finalSpy;
 
         before(function(done) {
             spy1 = sinon.spy(function(callback) {
@@ -51,14 +51,14 @@ describe('Handlers', function() {
                 thirdCall = Date.now();
                 setTimeout(callback, 100);
             });
+            finalSpy = sinon.spy(function() {
+                done();
+            });
 
-            chain = createChain()
+            chain = createChain(finalSpy)
                 .do(spy1)
                 .for('100ms', spy2)
-                .do(spy3)
-                .do(function() {
-                    done();
-                });
+                .do(spy3);
         });
 
         it('should call the first do invocation', function() {

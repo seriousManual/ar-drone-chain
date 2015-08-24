@@ -3,12 +3,18 @@ var ms = require('ms');
 var HandlerCB = require('./lib/HandlerCB');
 var HandlerTimeout = require('./lib/HandlerTimeout');
 
-function createChain() {
+function createChain(callback) {
+    callback = callback || function() {};
+
     var chain = {
         _queue: [],
 
         _runNext: function() {
             var next = chain._queue.shift();
+
+            if (!next) {
+                return callback();
+            }
 
             next.run(function() {
                 chain._runNext();
