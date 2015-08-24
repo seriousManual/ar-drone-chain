@@ -6,11 +6,15 @@ var chain = require('ar-drone-chain');
 
 var client  = arDrone.createClient();
 
-chain()
+var cb = function () {
+    console.log('chain has finished');
+};
+
+chain(cb)
     .do(client.takeoff.bind(client))
     .for('3s', client.clockwise.bind(client, 0.5))
-    .do(function() {
+    .do(function () {
         client.stop();
         client.land();
-    })
+    });
 ````
