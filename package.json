@@ -1,6 +1,6 @@
 {
   "name": "ar-drone-chain",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "chain for the ar-drone handler",
   "main": "chain.js",
   "directories": {
