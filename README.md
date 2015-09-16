@@ -13,6 +13,7 @@ var cb = function () {
 chain(cb)
     .do(client.takeoff.bind(client))
     .for('3s', client.clockwise.bind(client, 0.5))
+    .doNow(client.stop)
     .do(function (callback) {
         client.stop();
         client.land(callback);
