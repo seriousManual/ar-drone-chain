@@ -9,6 +9,10 @@
   "scripts": {
     "test": "node ./node_modules/mocha/bin/mocha tests"
   },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/seriousManual/ar-drone-chain.git"
+  },
   "author": "Manuel Ernst <seriousstuff@gmx.de>",
   "license": "MIT",
   "dependencies": {
