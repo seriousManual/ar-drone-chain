@@ -4,7 +4,7 @@
 var arDrone = require('ar-drone');
 var chain = require('ar-drone-chain');
 
-var client  = arDrone.createClient();
+var client = arDrone.createClient();
 
 var cb = function () {
     console.log('chain has finished');
