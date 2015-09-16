@@ -13,8 +13,8 @@ var cb = function () {
 chain(cb)
     .do(client.takeoff.bind(client))
     .for('3s', client.clockwise.bind(client, 0.5))
-    .do(function () {
+    .do(function (callback) {
         client.stop();
-        client.land();
+        client.land(callback);
     });
 ````
