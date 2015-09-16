@@ -3,6 +3,7 @@ var sinon = require('sinon');
 
 var HandlerCB = require('../lib/HandlerCB');
 var HandlerTimeout = require('../lib/HandlerTimeout');
+var HandlerNow = require('../lib/HandlerNow');
 var createChain = require('../chain');
 
 describe('Handlers', function () {
@@ -13,6 +14,20 @@ describe('Handlers', function () {
             });
 
             handler.run(done);
+        });
+    });
+
+    describe('HandlerNow', function () {
+        var spy;
+
+        before(function(done) {
+            spy = sinon.spy();
+
+            (new HandlerNow(spy)).run(done);
+        });
+
+        it('should call the callback', function () {
+            expect(spy.args.length).to.equal(1);
         });
     });
 

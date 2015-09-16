@@ -16,6 +16,10 @@ var client = {
             console.log('landing done');
             callback();
         }, 1000);
+    },
+
+    stop: function() {
+        console.log('stopping');
     }
 };
 
@@ -31,6 +35,7 @@ chain(cb)
     .for('1000ms', function () {
         console.log('for 1000ms');
     })
+    .doNow(client.stop.bind(client))
     .do(client.land.bind(client))
     .do(function (callback) {
         console.log('I\'m done!');

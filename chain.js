@@ -2,6 +2,7 @@ var ms = require('ms');
 
 var HandlerCB = require('./lib/HandlerCB');
 var HandlerTimeout = require('./lib/HandlerTimeout');
+var HandlerNow = require('./lib/HandlerNow');
 
 function createChain(callback) {
     callback = callback || function () {};
@@ -23,6 +24,12 @@ function createChain(callback) {
 
         do: function (fn) {
             chain._queue.push(new HandlerCB(fn));
+
+            return chain;
+        },
+
+        doNow: function(fn) {
+            chain._queue.push(new HandlerNow(fn));
 
             return chain;
         },
