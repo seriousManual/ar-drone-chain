@@ -22,6 +22,7 @@ Three commands are available:
           time
 ````
 
+## Example Usage
 ````javascript
 var arDrone = require('ar-drone');
 var chain = require('ar-drone-chain');
