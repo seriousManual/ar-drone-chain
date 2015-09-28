@@ -1,4 +1,4 @@
-# ar-drone-chain
+# ar-drone-chain [![Build Status](https://travis-ci.org/seriousManual/ar-drone-chain.png)](https://travis-ci.org/seriousManual/ar-drone-chain)
 
 ar-drone-chain helps when setting up a chain of commands a ar-drone should complete.
 
