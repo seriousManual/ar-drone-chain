@@ -2,6 +2,8 @@
 
 ar-drone-chain helps when setting up a chain of commands a ar-drone should complete.
 
+## Commands
+
 Three commands are available:
 
 ````
