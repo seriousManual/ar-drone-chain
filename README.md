@@ -15,7 +15,7 @@ Three commands are available:
           
   doNow   will execute the executed command immediately and will then proceed
           to the next step.
-          useful for commands that take not time, e.g. stopping the drone
+          useful for commands that take no time, e.g. stopping the drone
           
   for     takes a time span, formatted by the ms module and a function
           the function will be executed, after the specified timespan 
