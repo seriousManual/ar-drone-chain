@@ -16,7 +16,7 @@
   "author": "Manuel Ernst <seriousstuff@gmx.de>",
   "license": "MIT",
   "dependencies": {
-    "ms": "0.7.2"
+    "ms": "0.7.3"
   },
   "devDependencies": {
     "chai": "3.5.0",
